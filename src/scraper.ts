@@ -54,6 +54,8 @@ import {
   createCreateNoteTweetRequest,
   createCreateLongTweetRequest,
   getArticle,
+  getAllRetweeters,
+  Retweeter,
 } from './tweets';
 import {
   parseTimelineTweetsV2,
@@ -1049,5 +1051,14 @@ export class Scraper {
    */
   public async grokChat(options: GrokChatOptions): Promise<GrokChatResponse> {
     return await grokChat(options, this.auth);
+  }
+
+  /**
+   * Retrieves all users who retweeted the given tweet.
+   * @param tweetId The ID of the tweet.
+   * @returns An array of users (retweeters).
+   */
+  public async getRetweetersOfTweet(tweetId: string): Promise<Retweeter[]> {
+    return await getAllRetweeters(tweetId, this.auth);
   }
 }
